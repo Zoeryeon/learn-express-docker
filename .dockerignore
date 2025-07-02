@@ -1,0 +1,17 @@
+# Node.js 프로젝트에서 제외할 파일 및 폴더
+node_modules
+npm-debug.log
+yarn-error.log
+.env
+
+# Git 관련 파일
+.git
+.gitignore
+
+# IDE 및 편집기 설정 파일
+.vscode
+.idea
+
+# OS에서 생성하는 불필요한 파일
+.DS_Store
+Thumbs.db

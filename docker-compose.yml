@@ -1,0 +1,37 @@
+# docker-compose.yml
+services:
+  # 서비스명
+  app:
+    # .(현재폴더)에 있는 도커파일 사용하여 이미지 빌드
+    build: .
+    # 컨테이너 내부 3001포트를 로컬 3001에 연결
+    ports:
+      - '3001:3001'
+    # 환경변수파일 사용
+    env_file:
+      - .env
+    # 환경변수
+    environment:
+      # dev디펜던시 설치
+      - NODE_ENV=production
+      # 컨테이너 내부 db정보
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=1234
+      - DB_NAME=nodejs_db
+    # npm start
+    command: ['npm', 'start']
+    depends_on:
+      - db
+  db:
+    image: mysql:8.0.42
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      TZ: Asia/Seoul
+    # 초기 sql 스크립트 마운트하여 한번만 실행
+    volumes:
+      - ./nodejs_db.sql:/docker-entrypoint-initdb.d/nodejs_db.sql
+    # 로컬 db가 3306이므로 로컬 3307을 통해 컨테이너 내부 3306으로 접속
+    ports:
+      - '3307:3306'

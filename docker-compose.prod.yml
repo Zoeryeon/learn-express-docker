@@ -1,0 +1,23 @@
+# docker-compose.prod.yml
+services:
+  # 서비스명
+  app:
+    # .(현재폴더)에 있는 도커파일 사용하여 이미지 빌드
+    build: .
+    # 컨테이너 내부 3001포트를 로컬 3001에 연결
+    ports:
+      - '3001:3001'
+    # 환경변수파일 사용
+    env_file:
+      - .env
+    # 환경변수
+    environment:
+      # dev디펜던시 설치안됨
+      - NODE_ENV=production
+      # RDS db정보
+      - DB_HOST=<RDS 엔드포인트>
+      - DB_USER=<RDS 사용자>
+      - DB_PASSWORD=<RDS 비밀번호>
+      - DB_NAME=<RDS 데이터베이스 이름>
+    # npm start
+    command: ['npm', 'start']
