@@ -37,3 +37,4 @@ INSERT INTO user (name, age, comment) VALUES ('영희', 22, '반가워요. 영�
 INSERT INTO comment (user_id, comment) VALUES (1, 'ossam의 댓글');
 INSERT INTO comment (user_id, comment) VALUES (2, '철수의 댓글');
 
+SHOW DATABASES;

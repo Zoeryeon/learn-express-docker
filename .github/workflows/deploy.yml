@@ -37,7 +37,7 @@ jobs:
           echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
           echo "COOKIE_SECRET=${{ secrets.COOKIE_SECRET }}" >> .env
 
-      # 깃헙 소스 코드를 EC2/ubuntu/backend 경로로 복사, /backend는 변경 가능하며 서비스마다 달라야
+      # 깃헙 소스 코드를 EC2/ubuntu/backend 경로로 복사, /backend는 변경 가능하며 서비스마다 달라야함
       - name: Upload source code to EC2
         run: |
           rsync -avz --exclude node_modules --exclude .git ./ ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ubuntu/backend
